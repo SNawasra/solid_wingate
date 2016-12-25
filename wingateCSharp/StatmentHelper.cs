@@ -13,6 +13,7 @@ namespace wingateCSharp
             {
                 totalStatement += row.TransactionLineAmount;
             }
+
             return totalStatement;
         }
     }

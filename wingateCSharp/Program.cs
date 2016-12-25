@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using wingateCSharp.Interfaces;
@@ -15,7 +16,10 @@ namespace wingateCSharp
             //string [] values = File.ReadAllText(path).Split(',');
 
             List<wingateSchema> data = null;
-            var fileReader = new FileReader(path);
+            var logger = LogManager.GetCurrentClassLogger();
+
+            var fileReader = new FileReader(path,logger);
+
             //var values = "";
             //if (fileReader.Exist())
             //{
@@ -27,7 +31,7 @@ namespace wingateCSharp
             //        }
             //    }
             //}
-            
+
             var splitRes = fileReader.TrySplit(out data);
             var validationFunctionsList = new List<IValidator>
             {

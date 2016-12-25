@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,11 +13,16 @@ namespace wingateCSharp
     {
         private string Path {get; set;}
 
-        public FileReader(string path)
+        public FileReader(string path, Logger logger)
         {
             if (String.IsNullOrEmpty(path))
             {
                 throw new Exception("Path couldn't be null");
+            }
+
+            if (logger != null)
+            {
+                throw new Exception("Logs can't be null");
             }
 
             this.Path = path;
