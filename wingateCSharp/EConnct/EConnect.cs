@@ -1,17 +1,25 @@
 ﻿using Microsoft.Dynamics.GP.eConnect.Serialization;
+using NLog;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace wingateCSharp.EConnct
 {
     class EConnect
     {
-        public static taPMTransactionInsert SetTransactionLine(int jeEntry, wingateSchema row, decimal lineSequence, DateTime date, string vendor, string invoiceNumber)
-        {
+        private Logger logger { get; set; }
 
+        public EConnect(Logger logger)
+        {
+            if (logger != null)
+            {
+                throw new Exception("Logs can't be null");
+            }
+            this.logger = logger;
+        }
+
+        public taPMTransactionInsert SetTransactionLine(int jeEntry, wingateSchema row, decimal lineSequence, DateTime date, string vendor, string invoiceNumber)
+        {
             var line = new taPMTransactionInsert();
             var batch = "SunTrust" + DateTime.Now.ToString("MMyy");
 
@@ -28,14 +36,13 @@ namespace wingateCSharp.EConnct
         }
 
         // try to send insert the transaction to econnect and reurns the status of the insertion
-        public static bool TaPMTransactionInsert(int jeEntry, List<wingateSchema> rows, string connectionString, DateTime date, string vendor, string invoiceNumber)
+        public bool TaPMTransactionInsert(int jeEntry, List<wingateSchema> rows, string connectionString, DateTime date, string vendor, string invoiceNumber)
         {
-
-
             var eConnect = new eConnectType();
             var pmArray = new List<PMTransactionType>();
             var lineSequence = 0m;
 
+            logger.Info("Setting Transaction started");
             foreach (var row in rows) {
                 lineSequence = (lineSequence + 16384m);
                 var pmType = new PMTransactionType();
@@ -65,6 +72,7 @@ namespace wingateCSharp.EConnct
                 pmArray.Add(pmType);
                 eConnect.PMTransactionType = pmArray.ToArray();
             }
+            logger.Debug("Transaction setted successfully");
 
             string message = null;
             var memoryStream = EConnectHelper.XMLSerialize(eConnect);

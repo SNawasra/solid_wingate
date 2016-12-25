@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using wingateCSharp.Interfaces;
 
 namespace wingateCSharp
@@ -12,38 +9,41 @@ namespace wingateCSharp
     class FileReader : IFileReader
     {
         private string Path {get; set;}
+        private Logger logger { get; set; }
 
         public FileReader(string path, Logger logger)
         {
             if (String.IsNullOrEmpty(path))
             {
-                throw new Exception("Path couldn't be null");
+                logger.Info("Path couldn't be null");
+                throw new Exception("Path couldn't be null or empty");
             }
 
             if (logger != null)
             {
-                throw new Exception("Logs can't be null");
+                logger.Info("Logger can't be null");
+                throw new Exception("Logger can't be null");
             }
 
             this.Path = path;
+            this.logger = logger;
         } 
+
+        
         public bool TrySplit(string values, out List<wingateSchema> data)
         {
             data = null;
             return true;
         }
 
+        /// <summary>
+        /// fake trySplit method
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public bool TrySplit (out List<wingateSchema> data)
         {
-            //data = data.Replace('\n', ',');
-            //string[] rows = data.Split('\n');
-            //foreach (string row in rows)
-            //{
-
-            //}
-
             List<wingateSchema> temp = new List<wingateSchema>();
-            //String[] values = data.Split(',');
             for (int i = 0; i < 5; i++)
             {
                 wingateSchema x = new wingateSchema()
@@ -60,26 +60,26 @@ namespace wingateCSharp
                 temp.Add(x);
             }
 
+            this.logger.Info("Return fake data");
+
             data = temp;
             return true;
-
         }
         public bool TryRead(out string values)
         {
-            if (this.Exist())
+            if (File.Exists(this.Path))
             {
+                this.logger.Info("Start reading the file");
                 values = File.ReadAllText(Path);
+                this.logger.Debug("The file read successfully");
+
                 return true;
             }
 
+            this.logger.Info("Failed reading the file");
+
             values = null;
             return false;
-        }
-
-        public Boolean Exist()
-        {
-            if (!File.Exists(this.Path)) return true;
-            else return false;
         }
     }
 }

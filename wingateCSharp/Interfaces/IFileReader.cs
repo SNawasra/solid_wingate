@@ -10,7 +10,6 @@ namespace wingateCSharp.Interfaces
     {
         bool TrySplit(string values, out List<wingateSchema> data);
         bool TryRead(out string values);
-        Boolean Exist();
     }
 
 }

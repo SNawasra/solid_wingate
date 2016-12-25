@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,17 @@ namespace wingateCSharp.Validation
 {
     class NotNullValidation : IValidator
     {
+        private Logger logger { get; set; }
+
+        public NotNullValidation(Logger logger)
+        {
+            if (logger != null)
+            {
+                throw new Exception("Logs can't be null");
+            }
+            this.logger = logger;
+        }
+
         public bool Validator(string value)
         {
             if (String.IsNullOrEmpty(value))
