@@ -8,14 +8,20 @@ namespace wingateCSharp
 {
     class wingateSchema
     {
-        public wingateSchema(string supplierName,
+        public wingateSchema()
+        {
+
+        }
+        public wingateSchema(int rowId,
+            string supplierName,
             string cardholderFirstName,
             string cardholderLastName,
-            string transactionLineAmount,
+            decimal transactionLineAmount,
             string transactionLineCodingGLAccountNumber,
             decimal amount, 
             string transactionNotes)
         {
+
             this.SupplierName = supplierName;
             this.CardholderFirstName = cardholderFirstName;
             this.CardholderLastName = cardholderLastName;
@@ -25,10 +31,11 @@ namespace wingateCSharp
             this.TransactionNotes = transactionNotes;
         }
 
+        public int RowId { get; set; }
         public string SupplierName { get; set; }
         public string CardholderFirstName { get; set; }
         public string CardholderLastName { get; set; }
-        public string TransactionLineAmount { get; set; }
+        public decimal TransactionLineAmount { get; set; }
         public string TransactionLineCodingGLAccountNumber{ get; set; }
         public decimal Amount { get; set; }
         public string TransactionNotes { get; set; }

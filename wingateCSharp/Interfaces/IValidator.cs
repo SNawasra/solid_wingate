@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace wingateCSharp.Interfaces
 {
-    interface IFileReader
+    interface IValidator
     {
-        bool TrySplit(string values, out List<wingateSchema> data);
-        bool TryRead(out string values);
-        Boolean Exist();
+        bool Validator(string value);
     }
-
 }
