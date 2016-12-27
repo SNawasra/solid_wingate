@@ -29,5 +29,10 @@ namespace wingateCSharp.Validation
             }
             else return true;
         }
+
+        public bool Validator(wingateSchema value)
+        {
+            return Validator(value.CardholderFirstName);
+        }
     }
 }

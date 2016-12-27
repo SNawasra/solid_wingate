@@ -9,5 +9,7 @@ namespace wingateCSharp.Interfaces
     interface IValidator
     {
         bool Validator(string value);
+        bool Validator(wingateSchema value);
+
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using wingateCSharp.Interfaces;
 
 namespace wingateCSharp
 {
@@ -39,5 +40,15 @@ namespace wingateCSharp
         public string TransactionLineCodingGLAccountNumber{ get; set; }
         public decimal Amount { get; set; }
         public string TransactionNotes { get; set; }
+        public List<IValidator> ValidationFunctions { get; set; }
+
+        public bool Validate()
+        {
+            foreach(var val in ValidationFunctions)
+            {
+                val.Validator(this);
+            }
+            return false;
+        }
     }
 }
