@@ -7,7 +7,7 @@ using wingateCSharp.Interfaces;
 
 namespace wingateCSharp
 {
-    class wingateSchema
+    public class wingateSchema
     {
         public wingateSchema()
         {

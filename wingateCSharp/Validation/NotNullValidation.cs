@@ -8,13 +8,14 @@ using wingateCSharp.Interfaces;
 
 namespace wingateCSharp.Validation
 {
-    class NotNullValidation : IValidator
+    
+    public class NotNullValidation : IValidator
     {
-        private Logger logger { get; set; }
+        private ILogger logger { get; set; }
 
-        public NotNullValidation(Logger logger)
+        public NotNullValidation(ILogger logger)
         {
-            if (logger != null)
+            if (logger == null)
             {
                 throw new Exception("Logs can't be null");
             }

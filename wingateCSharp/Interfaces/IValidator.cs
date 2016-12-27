@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace wingateCSharp.Interfaces
 {
-    interface IValidator
+   public interface IValidator
     {
         bool Validator(string value);
         bool Validator(wingateSchema value);

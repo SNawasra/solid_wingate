@@ -27,7 +27,7 @@ namespace wingateCSharp
                     SupplierName = "Sameh" + i,
                     CardholderFirstName = "sameh" + i,
                     CardholderLastName = "Ahmed" + i,
-                    TransactionLineAmount = "4" + i,
+                    TransactionLineAmount = 40M+ i,
                     TransactionLineCodingGLAccountNumber = "111111",
                     Amount = 1.0M + i,
                     TransactionNotes = "Hi People"

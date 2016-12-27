@@ -10,9 +10,9 @@ using wingateCSharp.Interfaces;
 
 namespace wingateCSharp
 {
-    class WingateImporter
+    public class WingateImporter
     {
-        private Logger logger { get; set; }
+        private ILogger logger { get; set; }
         private IFileReader fileReader { get; set; }
         private List<IValidator> validatorList { get; set; }
         private ItaPMTransaction econnect { get; set; }
@@ -21,19 +21,22 @@ namespace wingateCSharp
             IFileReader fileReader,
             List<IValidator> validatorList,
             ItaPMTransaction econnect,
-            Logger logger)
+            ILogger logger)
         {
-            if((fileReader != null) && (validatorList !=null) && (validatorList.Count != 0) && (econnect != null) && (logger !=null))
-            {
+            //Almost Never should you put logic in a constructor unless you want to prevent a non-valid state in which case
+            // you should throw if nay of the things below is true
+            // right now you can stull create this class if any of the below are true which is not what you wanted.
+            //if((fileReader != null) && (validatorList !=null) && (validatorList.Count != 0) && (econnect != null) && (logger !=null))
+            //{
                 this.logger = logger;
                 this.validatorList = validatorList;
                 this.fileReader = fileReader;
                 this.econnect = econnect;
-            }
+            //}
         }
         public  void ImportWingate()
         {
-            List<wingateSchema> data = null;
+            List<wingateSchema> data = new List<wingateSchema>();
             //var values = "";
             //if (fileReader.TryRead(out values))
             //{
@@ -70,7 +73,7 @@ namespace wingateCSharp
                 return;
             }
 
-            econnect.TaPMTransactionInsert(data);
+            //econnect.TaPMTransactionInsert(data);
             logger.Info("lineAmount equal to the enterd");
         }
     }

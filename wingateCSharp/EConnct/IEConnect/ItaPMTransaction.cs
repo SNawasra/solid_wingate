@@ -7,10 +7,22 @@ using System.Threading.Tasks;
 
 namespace wingateCSharp.EConnct.IEConnect
 {
-    interface ItaPMTransaction
+    public interface ItaPMTransaction
     {
         bool TaPMTransactionInsert();
         taPMTransactionInsert SetTransactionLine(wingateSchema row);
 
+    }
+    public class taPmTransaction : ItaPMTransaction
+    {
+        public taPMTransactionInsert SetTransactionLine(wingateSchema row)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TaPMTransactionInsert()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
